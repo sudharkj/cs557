@@ -1,0 +1,22 @@
+##OpenGL GLIB
+LookAt 0 0 3  0 0 0  0 1 0
+
+Vertex	lighting.vert
+Fragment	lighting.frag
+Program Shader						\
+		Flat <false>				\
+		Ka <0. 0.1 1.0>				\
+		Kd <0. 0.6 1.0>				\
+		Ks <0. 0.3 1.0>				\
+		Shininess <0. 10. 5000.>		\
+		LightX <-20. 5. 20.>   		\
+		LightY <-20. 10. 20.>			\
+		LightZ <-20. 20. 20.>			\
+		Color {0.988 .698 0.090 1.}	\
+		SpecularColor {1. 1. 1. 1.}
+
+
+
+#Rotate -60  1 0 0
+Teapot
+#Obj Giraffe.obj
