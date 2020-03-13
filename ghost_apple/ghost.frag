@@ -6,6 +6,9 @@ uniform float uKa, uKd, uKs;
 uniform float uShininess;
 uniform vec4  uSpecularColor;
 
+uniform float           uEta;
+uniform samplerCube     uRefractUnit;
+
 uniform sampler3D Noise3;
 uniform float uNoiseAmp;
 uniform float uNoiseFreq;
@@ -64,7 +67,10 @@ main( )
         vec3 ref = normalize( 2. * Normal * dot(Normal, Light) - Light );
         s = pow( max( dot(Eye, ref), 0. ), uShininess );
     }
-    vec4 specular = uKs * s * uSpecularColor;
+	vec3 refractVector = refract( -Eye, Normal, uEta );
+	vec4 refractColor  = textureCube( uRefractUnit, refractVector);
+	refractColor       = mix( refractColor, WHITE_ICE, .4 );
+    vec4 specular = uKs * s * refractColor;
 
     gl_FragColor = vec4( ambient.rgb + diffuse.rgb + specular.rgb, 1. );
 }
